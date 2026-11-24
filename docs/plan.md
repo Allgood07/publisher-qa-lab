@@ -10,10 +10,10 @@
 
 | Риск | Приоритет | Где проверять |
 | --- | --- | --- |
-| Посетитель не видит опубликованный результат или видит неверную версию | Высокий | [`publish.spec.ts`](../tests/publish.spec.ts); отдельное наблюдение на своей странице [Site.pro](sitepro-check.md) |
-| Неопубликованная правка меняет публичную страницу | Высокий | [`published-snapshot.spec.ts`](../tests/published-snapshot.spec.ts); отдельно проверено на своей странице Site.pro |
-| Невалидные данные сохраняются или валидные данные теряются | Высокий | [`draft-validation.spec.ts`](../tests/draft-validation.spec.ts) и [`draft-text.spec.ts`](../tests/draft-text.spec.ts); на Site.pro [проверены поля редактора](sitepro-check.md#поля-редактора-и-текстовая-ссылка), форма посетителя не проверялась |
-| Ссылки или контент недоступны на узком экране | Средний | [`narrow-publication.spec.ts`](../tests/narrow-publication.spec.ts) — локально только контент; на своей странице Site.pro проверена одна внутренняя ссылка и контент при 360 px |
+| Посетитель не видит опубликованный результат или видит неверную версию | Высокий | [`publish.spec.ts`](../tests/e2e/publish.spec.ts), [`publication-lifecycle.spec.ts`](../tests/e2e/publication-lifecycle.spec.ts) и [`publication-state.spec.ts`](../tests/api/publication-state.spec.ts); отдельное наблюдение на своей странице [Site.pro](sitepro-check.md) |
+| Неопубликованная правка меняет публичную страницу | Высокий | [`published-snapshot.spec.ts`](../tests/e2e/published-snapshot.spec.ts); отдельно проверено на своей странице Site.pro |
+| Невалидные данные сохраняются или валидные данные теряются | Высокий | [`draft-validation.spec.ts`](../tests/api/draft-validation.spec.ts), [`draft-validation-state.spec.ts`](../tests/integration/draft-validation-state.spec.ts), [`draft-text.spec.ts`](../tests/integration/draft-text.spec.ts) и [`draft-size.spec.ts`](../tests/integration/draft-size.spec.ts); на Site.pro [проверены поля редактора](sitepro-check.md#поля-редактора-и-текстовая-ссылка), форма посетителя не проверялась |
+| Ссылки или контент недоступны на узком экране | Средний | [`narrow-publication.spec.ts`](../tests/integration/narrow-publication.spec.ts) — локально только контент; на своей странице Site.pro проверена одна внутренняя ссылка и контент при 360 px |
 
 **Кандидат на пилот:** автор сохраняет черновик, сверяет предпросмотр и публикует страницу; независимый контекст посетителя видит согласованный заголовок и содержимое. Это предложение для локального контракта, не утверждение о Site.pro. До кода согласовать наблюдаемые результаты, исходное состояние, способ изоляции данных и проверку очистки. POM или фабрики добавлять только там, где они устраняют повторение или помогают владеть данными. Unit-тесты — только для собственной нетривиальной логики.
 

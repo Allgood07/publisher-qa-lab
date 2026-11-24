@@ -1,13 +1,20 @@
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { once } from 'node:events';
 import { createRequire } from 'node:module';
 import { connect } from 'node:net';
 import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 
+const fixtureProbe = spawnSync(process.execPath, [fileURLToPath(new URL('./check-fixture-teardown.ts', import.meta.url))], {
+  stdio: 'inherit', timeout: 12_000, killSignal: 'SIGKILL',
+});
+if (fixtureProbe.error || fixtureProbe.status !== 0) {
+  throw new Error(`Fixture teardown probe failed: exit=${fixtureProbe.status} signal=${fixtureProbe.signal}`, { cause: fixtureProbe.error });
+}
+
 const require = createRequire(import.meta.url);
 const runner = spawn(process.execPath, [
-  require.resolve('@playwright/test/cli'), 'test', 'tests/publish.spec.ts',
+  require.resolve('@playwright/test/cli'), 'test', 'tests/e2e/publish.spec.ts',
   '--project=chromium', '--workers=1', '--retries=0', '--reporter=list',
 ], {
   cwd: fileURLToPath(new URL('..', import.meta.url)),
@@ -22,7 +29,14 @@ for (const stream of [runner.stdout, runner.stderr]) {
   stream.setEncoding('utf8');
   stream.on('data', (chunk: string) => { output += chunk; });
 }
-const [code, signal] = await once(runner, 'close');
+const [code, signal] = await once(runner, 'close', { signal: AbortSignal.timeout(60_000) }).catch((error: unknown) => {
+  runner.kill('SIGKILL');
+  if (error instanceof Error && error.name === 'AbortError') {
+    process.stdout.write(output);
+    throw new Error('Playwright runner did not close within 60s', { cause: error });
+  }
+  throw error;
+});
 process.stdout.write(output);
 if (exitedAt === undefined || code !== 1 || signal || !output.includes('Error: PILOT_CONTROLLED_FAILURE:') || !/\b1 failed\b/.test(output)) {
   throw new Error(`Expected the explicitly marked test failure, got exit=${code} signal=${signal}`);
