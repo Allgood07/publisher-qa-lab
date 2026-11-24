@@ -24,7 +24,8 @@ npx playwright test tests/publish.spec.ts --project=chromium --workers=1 --retri
 [Workflow QA](.github/workflows/qa.yml) запускается на pull request, при push в `main` и вручную. Он проверяет типы и запускает весь набор в Chromium на Ubuntu с Node.js 22. После успешного или упавшего прогона отчёт доступен в **Actions → QA → нужный запуск → Artifacts → playwright-report**, если Playwright успел его создать. Артефакт хранится 14 дней; ошибка теста остаётся ошибкой workflow. Контрольное падение `npm run test:cleanup` в CI не запускается.
 
 - [План и карта рисков](docs/plan.md)
-- [Контракт и результаты локальных проверок](docs/pilot.md)
+- [Контракт и результаты локальных проверок](docs/pilot.md), включая [приёмку из чистого клона](docs/pilot.md#приёмка-из-чистого-клона)
 - [Процесс независимого ревью](docs/reviewer.md)
+- [Роли Codex и фактический учебный прогон](docs/codex-roles.md)
 - [Отдельный отчёт о проверке страницы на Site.pro](docs/sitepro-check.md)
 - [Текущий статус и следующий шаг](docs/handoff.md)
