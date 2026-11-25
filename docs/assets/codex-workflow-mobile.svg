@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="1064" viewBox="0 0 480 1064" role="img" aria-labelledby="cover-title cover-desc">
+  <title id="cover-title">Publisher QA Lab — главный чат и подагенты Codex</title>
+  <desc id="cover-desc">Главный чат делегирует задачи Planner, Architect, Generator и Healer. Независимый Reviewer может проверять результаты каждой вызванной роли и решения оркестратора. Вердикт возвращается в главный чат.</desc>
+  <defs>
+    <linearGradient id="canvas" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#071424"/>
+      <stop offset="1" stop-color="#19172e"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="100%" cy="0%" r="74%">
+      <stop stop-color="#40307c" stop-opacity=".56"/>
+      <stop offset="1" stop-color="#40307c" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#a5b4fc" stroke-opacity=".11"/>
+    </pattern>
+    <marker id="cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#66c9ff"/>
+    </marker>
+    <marker id="violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#c1a5ff"/>
+    </marker>
+    <marker id="mint" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#65e6c5"/>
+    </marker>
+  </defs>
+
+  <rect width="480" height="1064" rx="25" fill="url(#canvas)"/>
+  <rect width="480" height="1064" rx="25" fill="url(#halo)"/>
+  <rect x="1" y="1" width="478" height="1062" rx="24" fill="url(#grid)" stroke="#7181b1" stroke-opacity=".42"/>
+
+  <g font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+    <rect x="28" y="26" width="27" height="27" rx="7" fill="#163e52" stroke="#60d5ff" stroke-opacity=".65"/>
+    <path d="m34 39 5 5 10-10" fill="none" stroke="#99efff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="67" y="46" fill="#b1dfff" font-size="15" font-weight="700" letter-spacing="1.7">PUBLISHER QA LAB</text>
+    <text x="28" y="100" fill="#f6f8ff" font-size="41" font-weight="760" letter-spacing="-.8">Главный чат</text>
+    <text x="28" y="146" fill="#f6f8ff" font-size="41" font-weight="760" letter-spacing="-.8">и подагенты</text>
+    <text x="29" y="181" fill="#bac9e6" font-size="20">Codex · независимое ревью</text>
+    <path d="M29 201H451" stroke="#6576a5" stroke-opacity=".4"/>
+
+    <g fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M240 324V372" stroke="#66c9ff" marker-end="url(#cyan)"/>
+      <path d="M240 670V738" stroke="#c1a5ff" marker-end="url(#violet)"/>
+      <path d="M413 274H439Q447 274 447 282V841Q447 849 439 849H415" stroke="#c1a5ff" stroke-dasharray="6 6" marker-end="url(#violet)"/>
+      <path d="M240 948V985" stroke="#65e6c5" marker-end="url(#mint)"/>
+      <path d="M82 1008H33Q25 1008 25 1000V282Q25 274 33 274H65" stroke="#65e6c5" marker-end="url(#mint)"/>
+    </g>
+
+    <rect x="66" y="225" width="348" height="100" rx="17" fill="#112e48" stroke="#65c6ff" stroke-width="1.4"/>
+    <text x="89" y="261" fill="#f2f8ff" font-size="28" font-weight="740">Главный чат</text>
+    <text x="89" y="291" fill="#9edcff" font-size="20" font-weight="620">Оркестратор</text>
+    <text x="89" y="315" fill="#c8dbf3" font-size="16">Критерии и выбор ролей</text>
+
+    <rect x="66" y="374" width="348" height="296" rx="17" fill="#121f36" stroke="#506187"/>
+    <text x="88" y="408" fill="#bad3ef" font-size="16" font-weight="680" letter-spacing=".8">ТОЛЬКО НУЖНЫЕ РОЛИ</text>
+    <path d="M88 420H392M88 484H392M88 543H392M88 602H392" stroke="#6576a5" stroke-opacity=".42"/>
+    <g fill="#f2f5ff" font-size="21" font-weight="700">
+      <text x="88" y="447">Planner</text>
+      <text x="88" y="506">Architect</text>
+      <text x="88" y="565">Generator</text>
+      <text x="88" y="624">Healer</text>
+    </g>
+    <g fill="#bdcde8" font-size="17">
+      <text x="88" y="470">Сценарий и ожидания</text>
+      <text x="88" y="529">Слой проверки и изоляция</text>
+      <text x="88" y="588">Тест и точечный прогон</text>
+      <text x="88" y="647">Диагностика при сбое</text>
+    </g>
+
+    <rect x="92" y="687" width="296" height="31" rx="15" fill="#211c3f" stroke="#9276d5"/>
+    <text x="240" y="708" text-anchor="middle" fill="#e4d9ff" font-size="16" font-weight="630">Результаты вызванных ролей</text>
+
+    <rect x="66" y="740" width="348" height="208" rx="17" fill="#231e41" stroke="#b39af5" stroke-width="1.4"/>
+    <text x="88" y="782" fill="#f5efff" font-size="31" font-weight="740">Reviewer</text>
+    <text x="89" y="812" fill="#d9caff" font-size="18">Отдельная сессия · read-only</text>
+    <path d="M88 829H392" stroke="#a68cdf" stroke-opacity=".42"/>
+    <circle cx="95" cy="855" r="4.5" fill="#c1a5ff"/>
+    <circle cx="95" cy="889" r="4.5" fill="#c1a5ff"/>
+    <text x="108" y="862" fill="#f0e9ff" font-size="19" font-weight="630">Результаты подагентов</text>
+    <text x="108" y="896" fill="#f0e9ff" font-size="19" font-weight="630">Решения оркестратора</text>
+    <text x="108" y="923" fill="#c6b9e9" font-size="16">При необходимости</text>
+
+    <rect x="80" y="987" width="320" height="43" rx="19" fill="#102a32" stroke="#65e6c5" stroke-opacity=".78"/>
+    <text x="240" y="1014" text-anchor="middle" fill="#b5f9e4" font-size="17" font-weight="670">Вердикт — в главный чат</text>
+  </g>
+</svg>

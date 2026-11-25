@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="cover-title cover-desc">
+  <title id="cover-title">Publisher QA Lab — главный чат и подагенты Codex</title>
+  <desc id="cover-desc">Главный чат делегирует задачи Planner, Architect, Generator и Healer. Независимый Reviewer может проверять результаты каждой вызванной роли и решения оркестратора. Вердикт возвращается в главный чат.</desc>
+  <defs>
+    <linearGradient id="canvas" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#071424"/>
+      <stop offset="1" stop-color="#17162b"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="91%" cy="0%" r="75%">
+      <stop stop-color="#40307c" stop-opacity=".56"/>
+      <stop offset="1" stop-color="#40307c" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#a5b4fc" stroke-opacity=".11"/>
+    </pattern>
+    <linearGradient id="orchestrator" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#12314c"/>
+      <stop offset="1" stop-color="#0d233b"/>
+    </linearGradient>
+    <linearGradient id="review" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#29204a"/>
+      <stop offset="1" stop-color="#191c36"/>
+    </linearGradient>
+    <marker id="cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#66c9ff"/>
+    </marker>
+    <marker id="violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#c1a5ff"/>
+    </marker>
+    <marker id="mint" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10Z" fill="#65e6c5"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="690" rx="29" fill="url(#canvas)"/>
+  <rect width="1200" height="690" rx="29" fill="url(#halo)"/>
+  <rect x="1" y="1" width="1198" height="688" rx="28" fill="url(#grid)" stroke="#7181b1" stroke-opacity=".42"/>
+  <path d="M48 184H1152" stroke="#6576a5" stroke-opacity=".4"/>
+
+  <g font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+    <rect x="48" y="38" width="32" height="32" rx="8" fill="#163e52" stroke="#60d5ff" stroke-opacity=".65"/>
+    <path d="m56 54 5 5 10-10" fill="none" stroke="#99efff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="94" y="60" fill="#b1dfff" font-size="15" font-weight="700" letter-spacing="2.1">PUBLISHER QA LAB</text>
+    <text x="1152" y="59" text-anchor="end" fill="#ddcffd" font-size="14" font-weight="620" letter-spacing="1.6">CODEX WORKFLOW</text>
+    <text x="48" y="128" fill="#f6f8ff" font-size="54" font-weight="760" letter-spacing="-1.5">Главный чат и подагенты</text>
+    <text x="50" y="164" fill="#bac9e6" font-size="22">Задачи — подагентам. Результаты и решения — на ревью.</text>
+
+    <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <!-- Orchestrator decisions are a separate input to the review. -->
+      <path d="M286 321V229Q286 219 296 219H1118Q1128 219 1128 229V283" stroke="#c1a5ff" stroke-width="2.4" stroke-dasharray="6 7" marker-end="url(#violet)"/>
+      <!-- Delegate only the roles needed for a task. -->
+      <path d="M315 408H366M366 312V540" stroke="#66c9ff" stroke-width="2.5"/>
+      <g stroke="#66c9ff" stroke-width="2.5" marker-end="url(#cyan)">
+        <path d="M366 312H425"/>
+        <path d="M366 388H425"/>
+        <path d="M366 464H425"/>
+        <path d="M366 540H425"/>
+      </g>
+      <!-- Each role can deliver its work to the independent reviewer. -->
+      <path d="M738 312H783M738 388H783M738 464H783M738 540H783M783 312V540" stroke="#c1a5ff" stroke-width="2.5"/>
+      <path d="M783 423H832" stroke="#c1a5ff" stroke-width="2.5" marker-end="url(#violet)"/>
+      <!-- The verdict returns to the decision owner. -->
+      <path d="M995 571V616Q995 626 985 626H192Q182 626 182 616V525" stroke="#65e6c5" stroke-width="2.5" marker-end="url(#mint)"/>
+    </g>
+
+    <rect x="388" y="201" width="424" height="36" rx="18" fill="#1c1938" stroke="#9276d5"/>
+    <text x="600" y="225" text-anchor="middle" fill="#e4d9ff" font-size="16" font-weight="650">Решения оркестратора · при необходимости</text>
+
+    <text x="49" y="269" fill="#9edcff" font-size="14" font-weight="700" letter-spacing="1.5">01 / УПРАВЛЕНИЕ</text>
+    <text x="430" y="269" fill="#cbd7f0" font-size="14" font-weight="700" letter-spacing="1.5">02 / ТОЛЬКО НУЖНЫЕ РОЛИ</text>
+    <text x="838" y="269" fill="#d5c5ff" font-size="14" font-weight="700" letter-spacing="1.5">03 / НЕЗАВИСИМАЯ ПРОВЕРКА</text>
+
+    <rect x="48" y="321" width="268" height="202" rx="19" fill="url(#orchestrator)" stroke="#65c6ff" stroke-width="1.5"/>
+    <path d="M74 352H94M74 360H103" stroke="#6ed8ff" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="74" y="397" fill="#f2f8ff" font-size="33" font-weight="740">Главный чат</text>
+    <text x="76" y="428" fill="#9edcff" font-size="21" font-weight="630">Оркестратор</text>
+    <path d="M74 447H290" stroke="#75b5d8" stroke-opacity=".34"/>
+    <text x="75" y="478" fill="#d1e3fb" font-size="18">Задаёт критерии</text>
+    <text x="75" y="503" fill="#d1e3fb" font-size="18">Выбирает роли</text>
+
+    <g fill="#121f36" stroke="#506187">
+      <rect x="429" y="280" width="310" height="64" rx="14"/>
+      <rect x="429" y="356" width="310" height="64" rx="14"/>
+      <rect x="429" y="432" width="310" height="64" rx="14"/>
+      <rect x="429" y="508" width="310" height="64" rx="14"/>
+    </g>
+    <g font-size="20" font-weight="700" fill="#f2f5ff">
+      <text x="486" y="307">Planner</text>
+      <text x="486" y="383">Architect</text>
+      <text x="486" y="459">Generator</text>
+      <text x="486" y="535">Healer</text>
+    </g>
+    <g font-size="16" fill="#bacbe8">
+      <text x="486" y="329">Сценарий и ожидания</text>
+      <text x="486" y="405">Слой проверки и изоляция</text>
+      <text x="486" y="481">Тест и точечный прогон</text>
+      <text x="486" y="557">Диагностика при сбое</text>
+    </g>
+    <g fill="none" stroke="#9bc9ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M449 305h22m-22 7h15m-15 7h18"/>
+      <path d="m450 384 10-6 10 6-10 6Zm0 7 10 6 10-6"/>
+      <path d="m455 458-6 6 6 6m10-12 6 6-6 6m-2-16-6 20"/>
+      <path d="M448 541h5l4-8 5 14 4-6h6"/>
+    </g>
+
+    <rect x="835" y="285" width="317" height="286" rx="19" fill="url(#review)" stroke="#b39af5" stroke-width="1.5"/>
+    <text x="861" y="330" fill="#f5efff" font-size="34" font-weight="740">Reviewer</text>
+    <text x="862" y="358" fill="#d9caff" font-size="17">Отдельная сессия · read-only</text>
+    <path d="M861 380H1126" stroke="#a68cdf" stroke-opacity=".42"/>
+    <circle cx="870" cy="412" r="5" fill="#c1a5ff"/>
+    <text x="885" y="418" fill="#f0e9ff" font-size="18" font-weight="650">Результаты подагентов</text>
+    <text x="885" y="442" fill="#c6b9e9" font-size="15">Каждой вызванной роли</text>
+    <circle cx="870" cy="474" r="5" fill="#c1a5ff"/>
+    <text x="885" y="480" fill="#f0e9ff" font-size="18" font-weight="650">Решения оркестратора</text>
+    <text x="885" y="504" fill="#c6b9e9" font-size="15">Критерии, роли, выводы</text>
+    <path d="M862 526H1126" stroke="#a68cdf" stroke-opacity=".3"/>
+    <text x="862" y="550" fill="#9ff4d6" font-size="15" font-weight="650">Выход: вердикт и замечания</text>
+
+    <rect x="410" y="607" width="380" height="38" rx="19" fill="#102a32" stroke="#65e6c5" stroke-opacity=".78"/>
+    <text x="600" y="632" text-anchor="middle" fill="#b5f9e4" font-size="16" font-weight="670">Вердикт и замечания — в главный чат</text>
+  </g>
+</svg>
