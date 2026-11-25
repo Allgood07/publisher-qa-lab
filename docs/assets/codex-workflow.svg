@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="cover-title cover-desc">
-  <title id="cover-title">Publisher QA Lab — главный чат и подагенты Codex</title>
+  <title id="cover-title">Publisher QA Lab — главный чат и сабагенты Codex</title>
   <desc id="cover-desc">Главный чат делегирует задачи Planner, Architect, Generator и Healer. Независимый Reviewer может проверять результаты каждой вызванной роли и решения оркестратора. Вердикт возвращается в главный чат.</desc>
   <defs>
     <linearGradient id="canvas" x2="1" y2="1" gradientUnits="objectBoundingBox">
@@ -42,8 +42,8 @@
     <path d="m56 54 5 5 10-10" fill="none" stroke="#99efff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="94" y="60" fill="#b1dfff" font-size="15" font-weight="700" letter-spacing="2.1">PUBLISHER QA LAB</text>
     <text x="1152" y="59" text-anchor="end" fill="#ddcffd" font-size="14" font-weight="620" letter-spacing="1.6">CODEX WORKFLOW</text>
-    <text x="48" y="128" fill="#f6f8ff" font-size="54" font-weight="760" letter-spacing="-1.5">Главный чат и подагенты</text>
-    <text x="50" y="164" fill="#bac9e6" font-size="22">Задачи — подагентам. Результаты и решения — на ревью.</text>
+    <text x="48" y="128" fill="#f6f8ff" font-size="54" font-weight="760" letter-spacing="-1.5">Главный чат и сабагенты</text>
+    <text x="50" y="164" fill="#bac9e6" font-size="22">Задачи — сабагентам. Результаты и решения — на ревью.</text>
 
     <g fill="none" stroke-linejoin="round" stroke-linecap="round">
       <!-- Orchestrator decisions are a separate input to the review. -->
@@ -108,7 +108,7 @@
     <text x="862" y="358" fill="#d9caff" font-size="17">Отдельная сессия · read-only</text>
     <path d="M861 380H1126" stroke="#a68cdf" stroke-opacity=".42"/>
     <circle cx="870" cy="412" r="5" fill="#c1a5ff"/>
-    <text x="885" y="418" fill="#f0e9ff" font-size="18" font-weight="650">Результаты подагентов</text>
+    <text x="885" y="418" fill="#f0e9ff" font-size="18" font-weight="650">Результаты сабагентов</text>
     <text x="885" y="442" fill="#c6b9e9" font-size="15">Каждой вызванной роли</text>
     <circle cx="870" cy="474" r="5" fill="#c1a5ff"/>
     <text x="885" y="480" fill="#f0e9ff" font-size="18" font-weight="650">Решения оркестратора</text>
