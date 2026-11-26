@@ -1,0 +1,432 @@
+{
+  "kind": "measured",
+  "metadata": {
+    "corpusSha": "423a2b57feaa62db602c3ddd1873a6193cfedb46",
+    "promptSha256": "1bf5a2d767e5854154c5a3577cde5a02bcde551f4080979a7f096f2818db0e1a",
+    "roleRevision": "reviewer-blind-v1",
+    "model": "openai-codex/gpt-5.6-sol",
+    "dateUtc": "2026-11-26T12:00:47Z",
+    "sampling": {
+      "reasoningEffort": "low",
+      "temperature": "provider default (not sent)",
+      "textVerbosity": "low",
+      "cacheRetention": "none",
+      "retries": 0,
+      "orderSeed": "publisher-reviewer-eval-gpt56-sol-v1",
+      "transport": "sse"
+    },
+    "tools": [],
+    "timeoutMs": 60000,
+    "maxOutputTokens": 1200
+  },
+  "attempts": [
+    {
+      "taskId": "q-e56a",
+      "attempt": 1,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 10,
+            "mechanism": "The post-republish assertion reads the draft via readPreview() instead of the visitor view via readPublic().",
+            "consequence": "The test can pass even if publishSaved() fails to replace the public snapshot, so it does not verify either public field after republishing.",
+            "repro": "Use a site where save(newer) updates the preview correctly but publishSaved() is a no-op. This assertion still passes while site.readPublic() remains equal to older."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "wrong-snapshot",
+          "note": "Строка 10: readPreview вместо readPublic; no-op publishSaved оставляет гостю older."
+        }
+      ]
+    },
+    {
+      "taskId": "q-248c",
+      "attempt": 1,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-f640",
+      "attempt": 1,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 3,
+            "mechanism": "Awaiting verify(visitor) outside a try/finally causes control flow to skip visitor.close() when verify rejects.",
+            "consequence": "An acquired visitor is not closed exactly once on verification failure.",
+            "repro": "Use a visitor whose close() increments a counter and a verify function that returns Promise.reject(new Error('failed')); after inspect rejects, assert the counter is 1. The candidate leaves it at 0."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "cleanup-on-rejection",
+          "note": "Строка 3: reject перескакивает close; счётчик вызовов остаётся нулём."
+        }
+      ]
+    },
+    {
+      "taskId": "q-b901",
+      "attempt": 1,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-7fe0",
+      "attempt": 1,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-5a2e",
+      "attempt": 1,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-3df5",
+      "attempt": 1,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 5,
+            "mechanism": "The test checks only that clientHeight is positive and never compares scrollHeight with clientHeight.",
+            "consequence": "A summary whose text extends below the hidden fixed-height box passes even though vertical text is clipped.",
+            "repro": "Use a summary with clientHeight = 10, scrollHeight = 20, and textContent = 'The venue closes at six.'; verify(summary) passes, but scrollHeight > clientHeight exposes clipping."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "vertical-clipping",
+          "note": "Строка 5: clientHeight > 0 не исключает scrollHeight > clientHeight; указаны высоты 10/20."
+        }
+      ]
+    },
+    {
+      "taskId": "q-1c8b",
+      "attempt": 1,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 6,
+            "mechanism": "The test passes the same `expected` object used by the assertion into `editor.stage`. If `stage` mutates that object, the expected value is mutated too.",
+            "consequence": "An editor that rewrites either field before publishing can still pass because `published()` is compared against the already-rewritten object.",
+            "repro": "Use an editor whose `stage(content)` sets `content.heading = 'Rewritten'` and stores it, whose `release()` publishes the stored object, and whose `published()` returns it; `verify` incorrectly succeeds."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "oracle-alias",
+          "note": "Строка 6: один объект для stage и эталона; пример с перезаписью heading до release."
+        }
+      ]
+    },
+    {
+      "taskId": "q-248c",
+      "attempt": 2,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-f640",
+      "attempt": 2,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 3,
+            "mechanism": "Awaiting verify outside a try/finally causes control flow to exit immediately when verify rejects, skipping visitor.close().",
+            "consequence": "An acquired visitor is not closed exactly once on verification failure, and its resources may leak.",
+            "repro": "Use createVisitor returning { close: async () => { closeCount++; } } and verify as async () => { throw new Error('failure'); }; await inspect(...).catch(() => {}), then assert closeCount === 1. The candidate leaves it at 0."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "cleanup-on-rejection",
+          "note": "Строка 3: rejected verify завершает функцию до close; предложен счётчик."
+        }
+      ]
+    },
+    {
+      "taskId": "q-e56a",
+      "attempt": 2,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 10,
+            "mechanism": "The post-republish assertion reads the draft via readPreview() instead of the visitor view via readPublic().",
+            "consequence": "The test can pass even if publishSaved() does not replace the public snapshot, so neither public field is verified after republishing.",
+            "repro": "Use a site where save(newer) updates preview, publishSaved() is a no-op, and readPublic() remains older; this test passes, while assert.deepEqual(site.readPublic(), newer) would fail."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "wrong-snapshot",
+          "note": "Строка 10: save меняет предпросмотр даже при no-op публикации; показывает отличие от проверки public."
+        }
+      ]
+    },
+    {
+      "taskId": "q-5a2e",
+      "attempt": 2,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-7fe0",
+      "attempt": 2,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-3df5",
+      "attempt": 2,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 5,
+            "mechanism": "The verification checks only that clientHeight is positive and never compares scrollHeight with clientHeight.",
+            "consequence": "An element whose text is vertically clipped can pass the test.",
+            "repro": "Call verify({textContent:'The venue closes at six.', clientHeight:10, scrollHeight:20}); it passes even though scrollHeight exceeds clientHeight."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "vertical-clipping",
+          "note": "Строка 5: показывает положительную видимую высоту при полном DOM-тексте и обрезании."
+        }
+      ]
+    },
+    {
+      "taskId": "q-b901",
+      "attempt": 2,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-1c8b",
+      "attempt": 2,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 6,
+            "mechanism": "The mutable `expected` object is passed directly to `stage`, allowing the editor to rewrite the same object later used as the assertion oracle.",
+            "consequence": "If `stage` mutates either field and `published()` returns that mutated content, the deep equality check passes despite incorrect publication.",
+            "repro": "Use an editor whose `stage(content)` sets `content.heading = 'Rewritten'` and stores it, whose `release()` publishes the stored object, and whose `published()` returns it; `verify` incorrectly passes."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "oracle-alias",
+          "note": "Строка 6: мутация входа меняет ожидаемое; воспроизведение сохраняет тот же изменённый объект."
+        }
+      ]
+    },
+    {
+      "taskId": "q-7fe0",
+      "attempt": 3,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-248c",
+      "attempt": 3,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-e56a",
+      "attempt": 3,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 10,
+            "mechanism": "The post-republish assertion reads the draft via readPreview() instead of the visitor view via readPublic().",
+            "consequence": "The test does not verify that publishSaved() replaced the public snapshot or that both public fields now match the saved draft; an implementation that leaves the public snapshot unchanged could pass.",
+            "repro": "Use a site where publishSaved() is a no-op while save(newer) updates the preview. The assertion passes because readPreview() returns newer, although readPublic() still returns older. Replace this check with assert.deepEqual(site.readPublic(), newer)."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "wrong-snapshot",
+          "note": "Строка 10: проверяется новый черновик, а не обновление двух полей публичного снимка."
+        }
+      ]
+    },
+    {
+      "taskId": "q-1c8b",
+      "attempt": 3,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 6,
+            "mechanism": "The test passes `expected` directly to `stage` and later uses that same object as the assertion oracle. If `stage` mutates the received object, it also mutates `expected`.",
+            "consequence": "An editor that rewrites `heading` or `summary` before publishing can incorrectly pass the test because actual and expected contain the same rewritten values.",
+            "repro": "Use an editor whose `stage(content)` sets `content.heading = 'Rewritten'` and stores it, whose `release()` publishes the stored object, and whose `published()` returns it; `verify` passes instead of failing."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "oracle-alias",
+          "note": "Строка 6: общий эталон меняется при записи любого поля; указана проверка с переписанным heading."
+        }
+      ]
+    },
+    {
+      "taskId": "q-b901",
+      "attempt": 3,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    },
+    {
+      "taskId": "q-f640",
+      "attempt": 3,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 3,
+            "mechanism": "Awaiting verify before entering any cleanup path means a rejected verification skips the subsequent visitor.close() call.",
+            "consequence": "An acquired visitor is not closed when async verify rejects, violating the exactly-once cleanup requirement.",
+            "repro": "Use createVisitor returning { close: async () => { closeCount++; } } and verify as async () => { throw new Error('fail'); }; await inspect(...).catch(() => {}), then assert closeCount === 1. The candidate leaves it at 0."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "cleanup-on-rejection",
+          "note": "Строка 3: отклонение verify происходит до участка очистки; пример проверяет один вызов вместо нуля."
+        }
+      ]
+    },
+    {
+      "taskId": "q-3df5",
+      "attempt": 3,
+      "status": "ok",
+      "response": {
+        "verdict": "block",
+        "findings": [
+          {
+            "file": "candidate.mjs",
+            "line": 5,
+            "mechanism": "The test checks only that clientHeight is positive and never compares scrollHeight with clientHeight.",
+            "consequence": "An element whose text extends below its visible inner height and is vertically clipped will incorrectly pass.",
+            "repro": "Call verify with { textContent: 'The venue closes at six.', clientHeight: 10, scrollHeight: 20 }; it does not throw, although scrollHeight > clientHeight proves vertical clipping."
+          }
+        ]
+      },
+      "labels": [
+        {
+          "kind": "match",
+          "defectId": "vertical-clipping",
+          "note": "Строка 5: проверка высоты без scrollHeight пропускает строку за видимым краем."
+        }
+      ]
+    },
+    {
+      "taskId": "q-5a2e",
+      "attempt": 3,
+      "status": "ok",
+      "response": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "labels": []
+    }
+  ]
+}
