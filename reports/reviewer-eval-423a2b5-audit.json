@@ -1,0 +1,299 @@
+{
+  "auditMeta": {
+    "model": "openai-codex/gpt-5.6-terra",
+    "dateUtc": "2026-11-26T12:06:21Z",
+    "kind": "independent-model-annotation",
+    "seen": [
+      "contracts",
+      "candidate sources",
+      "frozen references",
+      "raw public-task answers"
+    ],
+    "priorLabelsVisible": false,
+    "priorMetricsVisible": false,
+    "reasoningEffort": "low",
+    "maxOutputTokens": 4200,
+    "timeoutMs": 90000,
+    "retries": 0,
+    "corpusSha": "423a2b57feaa62db602c3ddd1873a6193cfedb46",
+    "sourceRunSha256": "8765fd825f314aafb9107b3ee7755397438151360236a413dd8ef639ede9e46e"
+  },
+  "rows": [
+    {
+      "taskId": "q-e56a",
+      "attempt": 1,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "wrong-snapshot",
+          "reason": "Line 10 reads readPreview() after republishing, so a stale public snapshot is not checked."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-248c",
+      "attempt": 1,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-f640",
+      "attempt": 1,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "cleanup-on-rejection",
+          "reason": "Line 3 awaits verify before close, so rejection skips visitor.close()."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-b901",
+      "attempt": 1,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-7fe0",
+      "attempt": 1,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-5a2e",
+      "attempt": 1,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-3df5",
+      "attempt": 1,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "vertical-clipping",
+          "reason": "Lines 4-5 check text and positive height but never compare scrollHeight to clientHeight."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-1c8b",
+      "attempt": 1,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "oracle-alias",
+          "reason": "Line 6 passes the assertion oracle object to stage, allowing in-place mutation to alter expected values."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-248c",
+      "attempt": 2,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-f640",
+      "attempt": 2,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "cleanup-on-rejection",
+          "reason": "Line 3 awaits verify outside finally, so rejection prevents close from running."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-e56a",
+      "attempt": 2,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "wrong-snapshot",
+          "reason": "Line 10 observes the preview rather than the public snapshot after publishSaved()."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-5a2e",
+      "attempt": 2,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-7fe0",
+      "attempt": 2,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-3df5",
+      "attempt": 2,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "vertical-clipping",
+          "reason": "The positive clientHeight check does not detect scrollHeight exceeding clientHeight."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-b901",
+      "attempt": 2,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-1c8b",
+      "attempt": 2,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "oracle-alias",
+          "reason": "Line 6 supplies expected itself to stage, so editor mutation also changes the deepEqual oracle."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-7fe0",
+      "attempt": 3,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-248c",
+      "attempt": 3,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-e56a",
+      "attempt": 3,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "wrong-snapshot",
+          "reason": "The final assertion at line 10 reads the saved draft rather than visitor-visible public content."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-1c8b",
+      "attempt": 3,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "oracle-alias",
+          "reason": "Line 6 aliases expected with the staged input, permitting in-place rewrites to corrupt the oracle."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-b901",
+      "attempt": 3,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-f640",
+      "attempt": 3,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "cleanup-on-rejection",
+          "reason": "A rejection from verify at line 3 bypasses the later close call."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-3df5",
+      "attempt": 3,
+      "verdict": "block",
+      "labels": [
+        {
+          "index": 1,
+          "kind": "match",
+          "defectId": "vertical-clipping",
+          "reason": "The test omits a scrollHeight versus clientHeight assertion, allowing vertical clipping to pass."
+        }
+      ],
+      "missed": [],
+      "referenceConcern": null
+    },
+    {
+      "taskId": "q-5a2e",
+      "attempt": 3,
+      "verdict": "approve",
+      "labels": [],
+      "missed": [],
+      "referenceConcern": null
+    }
+  ]
+}

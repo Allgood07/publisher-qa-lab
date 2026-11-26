@@ -1,0 +1,3 @@
+Review the candidate diff against the contract below. Report only actionable violations of the contract. Use the source line in candidate.mjs and explain the mechanism, consequence, and a concrete check that would expose it. Do not guess at requirements outside the contract.
+
+Return only a JSON object with keys `verdict` and `findings`. `verdict` is `approve` when there are no blockers and `block` otherwise. `findings` is an array of objects with exactly these keys: `file` (`candidate.mjs`), `line` (a positive integer), `mechanism`, `consequence`, `repro` (nonempty strings). Use an empty array for `approve`; provide at least one finding for `block`.
