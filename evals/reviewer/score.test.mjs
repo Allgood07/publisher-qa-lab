@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { scoreRun, validateResponse } from './score.mjs';
 import { taskIds } from './task.mjs';
@@ -39,6 +40,17 @@ test('Синтетические 24 попытки: дубль TP, пропус�
   assert.deepEqual(result.rows[1].missed, ['oracle-alias']);
   assert.equal(result.rows[1].verdict, null);
   assert.equal(result.rows[4].verdict, null);
+  assert.deepEqual(scoreRun({ ...run, attempts: [...run.attempts].reverse() }), result);
+});
+
+test('Сохранённая модельная серия пересчитывается по опубликованной разметке без модели', async () => {
+  const path = new URL('../../reports/reviewer-eval-423a2b5-run.json', import.meta.url);
+  const run = JSON.parse(await readFile(path, 'utf8'));
+  const result = scoreRun(run);
+  assert.equal(result.kind, 'measured');
+  assert.equal(result.provisional, false);
+  assert.deepEqual(result.totals, { attempts: 24, ok: 24, timeout: 0, invalid: 0, tp: 12, fn: 0, fp: 0, disputed: 0, cleanAttempts: 12, cleanValid: 12, cleanBlocked: 0, stableTasks: 8, completeTasks: 8, tasks: 8 });
+  assert.deepEqual(result.metrics, { precision: 1, recall: 1, falseBlockRateAllClean: 0, falseBlockRateValidClean: 0, repeatabilityAllTasks: 1, repeatabilityCompleteTasks: 1 });
   assert.deepEqual(scoreRun({ ...run, attempts: [...run.attempts].reverse() }), result);
 });
 
