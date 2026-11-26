@@ -5,7 +5,11 @@ import type { Publication } from '../publication.ts';
 export class PublisherApi {
   constructor(private readonly request: APIRequestContext) {}
 
-  saveDraft(form: Partial<Publication>) {
+  readEditor() {
+    return this.request.get('/editor', { maxRedirects: 0 });
+  }
+
+  saveDraft(form: Partial<Publication> & { baseRevision?: string }) {
     return this.request.post('/draft', { form: { ...form }, maxRedirects: 0 });
   }
 
