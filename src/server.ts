@@ -5,6 +5,7 @@ const host = '127.0.0.1';
 const publicPath = '/p/pilot-page';
 type Content = Readonly<{ title: string; body: string }>;
 let draft: Content | undefined;
+let draftRevision = 0n;
 let published: Content | undefined;
 
 function escapeHtml(text: string): string {
@@ -22,15 +23,29 @@ function redirect(response: ServerResponse, location: string): void {
   response.writeHead(303, { Location: location }).end();
 }
 
+function editorFields(content: Content | undefined, readOnly = false): string {
+  const fieldMode = readOnly ? 'readonly' : 'required';
+  return `<p><label for="title">Заголовок</label> <input id="title" name="title" ${fieldMode} value="${escapeHtml(content?.title ?? '').replaceAll('"', '&quot;')}"></p>
+<p><label for="body">Текст</label> <textarea id="body" name="body" ${fieldMode}>
+${escapeHtml(content?.body ?? '')}</textarea></p>`;
+}
+
+function draftConflict(submitted: Content): string {
+  return `<h1>Редактор</h1>
+<p role="alert">Черновик изменился. Ваша правка не сохранена.</p>
+<p>Откройте свежий черновик и перенесите в него нужные изменения из полей ниже.</p>
+<p><a href="/editor" target="_blank" rel="noopener">Открыть свежий черновик в новой вкладке</a></p>
+${editorFields(submitted, true)}`;
+}
+
 function editor(notice: string | null): string {
   const status = notice === 'saved' ? '<p role="status">Черновик сохранён</p>'
     : notice === 'published' && published ? '<p role="status">Опубликовано</p>' : '';
   return `<h1>Редактор</h1>
 ${status}
 <form action="/draft" method="post">
-  <p><label for="title">Заголовок</label> <input id="title" name="title" required value="${escapeHtml(draft?.title ?? '').replaceAll('"', '&quot;')}"></p>
-  <p><label for="body">Текст</label> <textarea id="body" name="body" required>
-${escapeHtml(draft?.body ?? '')}</textarea></p>
+  <input type="hidden" name="baseRevision" value="${draftRevision}">
+  ${editorFields(draft)}
   <button>Сохранить черновик</button>
 </form>
 ${draft ? `<p><a href="/preview">Предпросмотр</a></p>
@@ -60,7 +75,10 @@ async function handle(request: IncomingMessage, response: ServerResponse): Promi
   response.setHeader('Cache-Control', 'no-store');
   const url = new URL(request.url ?? '/', `http://${host}`);
   if (request.method === 'GET') {
-    if (url.pathname === '/editor') return html(response, 200, editor(url.searchParams.get('notice')));
+    if (url.pathname === '/editor') {
+      response.setHeader('X-Draft-Revision', draftRevision.toString());
+      return html(response, 200, editor(url.searchParams.get('notice')));
+    }
     if (url.pathname === '/preview' && draft) {
       return html(response, 200, `<p>Предпросмотр</p>${renderContent(draft)}<p><a href="/editor">Вернуться в редактор</a></p>`);
     }
@@ -72,7 +90,15 @@ async function handle(request: IncomingMessage, response: ServerResponse): Promi
     const title = form.get('title');
     const body = form.get('body');
     if (!title?.trim() || !body?.trim()) return html(response, 400, '<h1>Заполните заголовок и текст</h1>');
+    const baseRevision = form.get('baseRevision');
+    if (baseRevision !== null) {
+      if (form.getAll('baseRevision').length !== 1 || !/^(0|[1-9][0-9]*)$/.test(baseRevision)) {
+        return html(response, 400, '<h1>Некорректная ревизия черновика</h1>');
+      }
+      if (baseRevision !== draftRevision.toString()) return html(response, 409, draftConflict({ title, body }));
+    }
     draft = { title, body };
+    draftRevision += 1n;
     return redirect(response, '/editor?notice=saved');
   }
   if (request.method === 'POST' && url.pathname === '/publish' && draft) {
